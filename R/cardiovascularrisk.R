@@ -117,13 +117,22 @@ baseline = 0.9533
 }
 
 sum = age + age2 + tchol + int1 + hdl + int2 + sbpR + int3 + sbpN + int4 + int5 + smoke + diabetes
+
 #FIX FORMATTING SO HAS AT LEAST 0
 prob = round (100 * (1 - baseline^exp(sum - (meancoef))),2)
 #Revise for withstatins
 arr = prob * 0.27 #0.27 IS RRR for statins per PMID 
 withstatins = prob - arr
 
-#Revise for withaspirin
+#Revise for SGLT2i
+arr = prob * 0.17 #0.27 IS RRR for SGLT2i per PMID Wiviott (DECLARE–TIMI 58). Dapagliflozin RCT. N Engl J Med. 2019 PMID 30415602.pdf
+withSGLT2i = prob - arr
+
+#Revise for GLP1Ra
+arr = prob * 0.13 #0.27 IS RRR for GLP1Ra per PMID Gerstein (REWIND) Dulaglutide RCT.  Lancet 2019 PMID 31189511.pdf
+withsGLP1Ra = prob - arr
+
+#Revise for with aspirin
 arr = prob * 0.22 #0.22 IS RRR for nonfatal MI reduction by aspirin per PMID 27064410
 withaspirin = prob - arr
 
@@ -190,7 +199,7 @@ arr_both = prob - optimal
 #chart - start
 if (pageformat == "chart")
   {
-  #msg = paste("<h3>Your risk of cardiovascular disease in 10 years</h3><div>",sprintf("%.1f",prob), '% probability of cardiovascular event within 10 years.</div>')
+  #msg = paste("<h3>Your estimated risk of cardiovascular disease in 10 years</h3><div>",sprintf("%.1f",prob), '% probability of cardiovascular event within 10 years.</div>')
   msg = paste("<h3>Your risk of cardiovascular disease in 10 years</h3>")
   
   #Start SVG output
@@ -201,8 +210,10 @@ if (pageformat == "chart")
   	}
   #Make SVG
   svgheight = 185
+  if (diabetes0 == 1) {svgheight=svgheight+80}
   if (smoke0 > 0){svgheight=svgheight+40}
   if (sbp > 140) {svgheight=svgheight+40}
+  
   svgtext = paste("<svg x=\"0px\" y=\"0px\" width=\"420px\" height=\"",svgheight,"px\" viewBox=\"0 0 420 ",svgheight,"\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">
   <!-- Scale -->
   <text x=\"0\" y=\"15\" fill=\"black\" style=\"font-weight:bold\">0%</text><text x=\"90\" y=\"15\" fill=\"black\" style=\"font-weight:bold\">25%</text><text x=\"190\" y=\"15\" fill=\"black\" style=\"font-weight:bold\">50%</text><text x=\"290\" y=\"15\" fill=\"black\" style=\"font-weight:bold\">75%</text><text x=\"380\" y=\"15\" fill=\"black\" style=\"font-weight:bold\">100%</text>
@@ -222,6 +233,19 @@ if (pageformat == "chart")
   	svgtext = paste(svgtext,"<text x=\"0\" y=\"",currenty, "\" fill=\"black\" style=\"\">With statins for 10 years</text>\n", sep = "")
   	currenty = currenty + 5
   	svgtext = paste(svgtext,"<polygon points=\"0,",currenty,",", withstatins*4,",", currenty, ",", withstatins*4,",", currenty+20, ",0,", currenty+20, "\"  style=\"fill:green;fill-opacity:0.5;stroke-width:0\"/><text x=\"",10+withstatins*4,"\" y=\"", currenty+15,"\" style=\"fill:green;font-weight:bold\">", sprintf("%.1f",withstatins),"%</text>\n", sep = "")
+  if (diabetes0 == 1)
+  	{
+  #SGLT2i
+  	currenty = currenty + 35
+  	svgtext = paste(svgtext,"<text x=\"0\" y=\"",currenty, "\" fill=\"black\" style=\"\">With dapagliflozin (a flozin or SGLT2i) for 10 years</text>\n", sep = "")
+  	currenty = currenty + 5
+  	svgtext = paste(svgtext,"<polygon points=\"0,",currenty,",", withSGLT2i*4,",", currenty, ",", withSGLT2i*4,",", currenty+20, ",0,", currenty+20, "\"  style=\"fill:green;fill-opacity:0.5;stroke-width:0\"/><text x=\"",10+withSGLT2i*4,"\" y=\"", currenty+15,"\" style=\"fill:green;font-weight:bold\">", sprintf("%.1f",withSGLT2i),"%</text>\n", sep = "")
+  #GLP1Ra
+  	currenty = currenty + 35
+  	svgtext = paste(svgtext,"<text x=\"0\" y=\"",currenty, "\" fill=\"black\" style=\"\">With dulaglutide (a gliptin or GLP1Ra) for 10 years</text>\n", sep = "")
+  	currenty = currenty + 5
+  	svgtext = paste(svgtext,"<polygon points=\"0,",currenty,",", withsGLP1Ra*4,",", currenty, ",", withsGLP1Ra*4,",", currenty+20, ",0,", currenty+20, "\"  style=\"fill:green;fill-opacity:0.5;stroke-width:0\"/><text x=\"",10+withsGLP1Ra*4,"\" y=\"", currenty+15,"\" style=\"fill:green;font-weight:bold\">", sprintf("%.1f",withsGLP1Ra),"%</text>\n", sep = "")
+  	}
   #Aspirin
   	currenty = currenty + 35
   	svgtext = paste(svgtext,"<text x=\"0\" y=\"",currenty, "\" fill=\"black\" style=\"\">With aspirin for 10 years</text>\n", sep = "")
