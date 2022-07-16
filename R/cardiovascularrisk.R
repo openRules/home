@@ -120,16 +120,17 @@ sum = age + age2 + tchol + int1 + hdl + int2 + sbpR + int3 + sbpN + int4 + int5 
 
 #FIX FORMATTING SO HAS AT LEAST 0
 prob = round (100 * (1 - baseline^exp(sum - (meancoef))),2)
+
 #Revise for withstatins
-arr = prob * 0.27 #0.27 IS RRR for statins per PMID 
+arr = prob * 0.27 #0.73 IS RRR for statins per Taylor et al. Statins for the primary prevention of cardiovascular disease. Cochrane 2013 PMID: 23440795 
 withstatins = prob - arr
 
 #Revise for SGLT2i
-arr = prob * 0.17 #0.27 IS RRR for SGLT2i per PMID Wiviott (DECLARE–TIMI 58). Dapagliflozin RCT. N Engl J Med. 2019 PMID 30415602.pdf
+arr = prob * 0.07 #0.93 (insig) is RRR for SGLT2i per PMID Wiviott (DECLARE–TIMI 58). Dapagliflozin RCT. N Engl J Med. 2019 PMID 30415602
 withSGLT2i = prob - arr
 
 #Revise for GLP1Ra
-arr = prob * 0.13 #0.27 IS RRR for GLP1Ra per PMID Gerstein (REWIND) Dulaglutide RCT.  Lancet 2019 PMID 31189511.pdf
+arr = prob * 0.13 #0.87 (insig) IS RRR for GLP1Ra per PMID Gerstein (REWIND) Dulaglutide RCT.  Lancet 2019 PMID 31189511
 withsGLP1Ra = prob - arr
 
 #Revise for with aspirin
