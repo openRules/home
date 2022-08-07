@@ -260,7 +260,7 @@ if (pageformat == "chart")
   if (smoke0 > 0)
   	{
   	currenty = currenty + 35
-  	svgtext = paste(svgtext,"<text x=\"0\" y=\"",currenty, "\" fill=\"black\" style=\"\">With smoking cessation (after three years)</text>\n", sep = "")
+  	svgtext = paste(svgtext,"<text x=\"0\" y=\"",currenty, "\" fill=\"black\" style=\"\">With smoking cessation (after 10 - 15 years; PMID <a href=\"http://pubmed.gov/31429895\">31429895</a>)</text>\n", sep = "")
   	currenty = currenty + 5
   	svgtext = paste(svgtext,"<polygon points=\"0,",currenty,",", withsmokecess*4,",", currenty, ",", withsmokecess*4,",", currenty+20, ",0,", currenty+20, "\"  style=\"fill:green;fill-opacity:0.5;stroke-width:0\"/><text x=\"",10+withsmokecess*4,"\" y=\"", currenty+15,"\" style=\"fill:green;font-weight:bold\">", sprintf("%.1f",withsmokecess),"%</text>\n", sep = "")
   	}
@@ -268,7 +268,7 @@ if (pageformat == "chart")
   currenty = currenty + 35
   if (smoke0 > 0)
   	{
-  	svgtext = paste(svgtext,"<text x=\"0\" y=\"",currenty, "\" fill=\"black\" style=\"\">Without smoking and with optimal cholesterol and blood pressure (after three years)</text>\n", sep = "")
+  	svgtext = paste(svgtext,"<text x=\"0\" y=\"",currenty, "\" fill=\"black\" style=\"\">Without smoking and with optimal cholesterol and blood pressure (after 10-15 years)</text>\n", sep = "")
   	}
   else
   	{
