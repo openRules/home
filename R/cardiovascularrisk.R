@@ -1,5 +1,7 @@
 cardiovascularrisk <- function(site = "", age0 = 0, gender = "", ethnicity = "", smoke0 = 0, diabetes0 = 0, bmi = 0, bprx = 0, sbp = 0, tchol0 = 0, ldl0 = 0, hdl0 = 0,  pageformat = 'factsbox'){
 
+# Calcuations for the pooled cohort equation from Goff. 2013 AHA-ACC Gudieline on assessment. Circulation 2013 PMID 24222018.pdf	
+	
   if(age0 < 1){
     stop("Tell me your age!")
   }
@@ -30,91 +32,91 @@ if (bprx == 1){sbpR0 = sbp}else{sbpN0 = sbp}
 
 #MEN
 if (gender == "m")
-{
-if (ethnicity == "w" || ethnicity == "a" || ethnicity == "h")
-{
-#WHITE MEN
-age = 12.344 * log(age0)
-age2 = 0 #NA
-tchol = 11.853 * log(tchol0)
-int1 = -2.664 * log(age0) * log(tchol0)
-hdl = -7.990 * log(hdl0)
-int2 = 1.769 * log(age0) * log(hdl0)
-if (sbpR0 > 0) {sbpR = 1.797 * log(sbpR0)}else{sbpR = 0}
-if (sbpN0 > 0) {sbpN = 1.764 * log(sbpN0)}else{sbpN = 0}
-smoke = 7.837 * smoke0 
-int3 = 0 #Women only
-if (diabetes0 == 1) {diabetes = 0.658}
-int4 = 0 #Women only
-#Fixed 6/13/2018
-int5 = -1.795 * log(age0) * smoke0
-#int5 = 0
-meancoef = 61.18
-baseline = 0.9144
-}
-else
-{
-#AA MEN
-age = 2.469 * log(age0)
-age2 = 0 #NA
-tchol = 0.302 * log(tchol0)
-int1 = 0 #NA
-hdl = -0.307 * log(hdl0)
-int2 = 0 #NA
-if (sbpR0 > 0) {sbpR = 1.916 * log(sbpR0)}else{sbpR = 0}
-if (sbpN0 > 0) {sbpN = 1.809 * log(sbpN0)}else{sbpN = 0}
-smoke = 0.549 * smoke0 
-int3 = 0 #Women only
-if (diabetes0 == 1) {diabetes = 0.645}
-int4 = 0 #Women only
-int5 = 0 #Anglos only
-meancoef = 19.54
-baseline = 0.8954
-}
-}
+	{
+	if (ethnicity == "w" || ethnicity == "a" || ethnicity == "h")
+		{
+		#WHITE MEN
+		age = 12.344 * log(age0)
+		age2 = 0 #NA
+		tchol = 11.853 * log(tchol0)
+		int1 = -2.664 * log(age0) * log(tchol0)
+		hdl = -7.990 * log(hdl0)
+		int2 = 1.769 * log(age0) * log(hdl0)
+		if (sbpR0 > 0) {sbpR = 1.797 * log(sbpR0)}else{sbpR = 0}
+		if (sbpN0 > 0) {sbpN = 1.764 * log(sbpN0)}else{sbpN = 0}
+		smoke = 7.837 * smoke0 
+		int3 = 0 #Women only
+		if (diabetes0 == 1) {diabetes = 0.658}
+		int4 = 0 #Women only
+		#Fixed 6/13/2018
+		int5 = -1.795 * log(age0) * smoke0
+		#int5 = 0
+		meancoef = 61.18  # Per Goff, page 38
+		baseline = 0.9144 # Baseline survival per Goff, page 38
+		}
+	else
+		{
+		#AA MEN
+		age = 2.469 * log(age0)
+		age2 = 0 #NA
+		tchol = 0.302 * log(tchol0)
+		int1 = 0 #NA
+		hdl = -0.307 * log(hdl0)
+		int2 = 0 #NA
+		if (sbpR0 > 0) {sbpR = 1.916 * log(sbpR0)}else{sbpR = 0}
+		if (sbpN0 > 0) {sbpN = 1.809 * log(sbpN0)}else{sbpN = 0}
+		smoke = 0.549 * smoke0 
+		int3 = 0 #Women only
+		if (diabetes0 == 1) {diabetes = 0.645}
+		int4 = 0 #Women only
+		int5 = 0 #Anglos only
+		meancoef = 19.54  # Per Goff, page 38
+		baseline = 0.8954 # Baseline survival per Goff, page 38
+		}
+	}
 
 #WOMEN
 if (gender == "f")
-{
-if (ethnicity == "w" || ethnicity == "a" || ethnicity == "h")
-{
-#WHITE WOMEN
-age = -29.799 * log(age0)
-age2 = 4.884 * log(age0)^2
-tchol = 13.540 * log(tchol0)
-int1 = -3.114 * log(age0) * log(tchol0)
-hdl = -13.578 * log(hdl0)
-int2 = 3.149 * log(age0) * log(hdl0)
-if (sbpR0 > 0) {sbpR = 2.019 * log(sbpR0)}else{sbpR = 0}
-int3 = 0 #AA Women only
-if (sbpN0 > 0) {sbpN = 1.957 * log(sbpN0)}else{sbpN = 0}
-int4 = 0 #AA Women only
-smoke = 7.574 * smoke0 
-int5 = -1.665 * log(age0) * smoke0
-if (diabetes0 == 1) {diabetes = 0.661}
-meancoef = -29.18
-baseline = 0.9665
-}
-else
-{
-#AA WOMEN
-age = 17.114 * log(age0)
-age2 = 0 #NA
-tchol = 0.940 * log(tchol0)
-int1 = 0 #NA
-hdl = -18.920 * log(hdl0)
-int2 = 4.475 * log(age0) * log(hdl0)
-if (sbpR0 > 0) {sbpR = 29.291 * log(sbpR0)}else{sbpR = 0}
-if (sbpR0 > 0) {int3 = -6.432 * log(age0) * log(sbpR0)}else{int3 = 0}
-if (sbpN0 > 0) {sbpN = 27.820 * log(sbpN0)}else{sbpN = 0}
-if (sbpN0 > 0) {int4 = -6.087 * log(age0) * log(sbpN0)}else{int4 = 0}
-smoke = 0.691 * smoke0 
-int5 = 0 #Anglos only
-if (diabetes0 == 1) {diabetes = 0.874}
-meancoef = 86.61
-baseline = 0.9533
-}
-}
+	{
+	if (ethnicity == "w" || ethnicity == "a" || ethnicity == "h")
+		{
+		#WHITE WOMEN
+		age = -29.799 * log(age0)
+		age2 = 4.884 * log(age0)^2
+		tchol = 13.540 * log(tchol0)
+		int1 = -3.114 * log(age0) * log(tchol0)
+		hdl = -13.578 * log(hdl0)
+		int2 = 3.149 * log(age0) * log(hdl0)
+		if (sbpR0 > 0) {sbpR = 2.019 * log(sbpR0)}else{sbpR = 0}
+		int3 = 0 #AA Women only
+		if (sbpN0 > 0) {sbpN = 1.957 * log(sbpN0)}else{sbpN = 0}
+		int4 = 0 #AA Women only
+		smoke = 7.574 * smoke0 
+		int5 = -1.665 * log(age0) * smoke0
+		if (diabetes0 == 1) {diabetes = 0.661}
+		meancoef = -29.18  # Per Goff, page 38
+		baseline = 0.9665  # Baseline survival per Goff, page 38
+		}
+	else
+		{
+		#AA WOMEN
+		age = 17.114 * log(age0)
+		age2 = 0 #NA
+		tchol = 0.940 * log(tchol0)
+		int1 = 0 #NA
+		hdl = -18.920 * log(hdl0)
+		int2 = 4.475 * log(age0) * log(hdl0)
+		if (sbpR0 > 0) {sbpR = 29.291 * log(sbpR0)}else{sbpR = 0}
+		if (sbpR0 > 0) {int3 = -6.432 * log(age0) * log(sbpR0)}else{int3 = 0}
+		if (sbpN0 > 0) {sbpN = 27.820 * log(sbpN0)}else{sbpN = 0}
+		if (sbpN0 > 0) {int4 = -6.087 * log(age0) * log(sbpN0)}else{int4 = 0}
+		smoke = 0.691 * smoke0 
+		int5 = 0 #Anglos only
+		if (diabetes0 == 1) {diabetes = 0.874}
+		meancoef = 86.61  # Per Goff, page 38
+		baseline = 0.9533 # Baseline survival per Goff, page 38
+		}
+	}
 
 sum = age + age2 + tchol + int1 + hdl + int2 + sbpR + int3 + sbpN + int4 + int5 + smoke + diabetes
 
@@ -184,6 +186,7 @@ withsbp = round (100 * (1 - baseline^exp(sum - (meancoef))),2)
 
 #Revise for nonsmoking
 #Below added 06/13/2018
+# First, revise sum of coefficients
 smoke = 0 #Added this 06/13/2018
 int5 = 0 #(Log Age×Current Smoker) ; Added this 06/13/2018
 #if (ethnicity != "b" && gender != "f"){int3=0}
