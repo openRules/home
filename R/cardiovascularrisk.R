@@ -139,7 +139,23 @@ withsGLP1Ra = prob - arr
 arr = prob * 0.22 #0.22 IS RRR for nonfatal MI reduction by aspirin per PMID 27064410
 withaspirin = prob - arr
 
+#Revise for nonsmoking
+#Below added 06/13/2018
+# First, revise sum of coefficients
+smoke_revised = 0 #Added this 06/13/2018
+int5_revised = 0 #(Log Age×Current Smoker) ; Added this 06/13/2018
+#if (ethnicity != "b" && gender != "f"){int3=0}
+sum = age + age2 + tchol + int1 + hdl + int2 + sbpR + int3 + sbpN + int4 + int5_revised + smoke_revised + diabetes
+withsmokecess = round (100 * (1 - baseline^exp(sum - (meancoef))),2) # THIS is used for the bar plot!
+#Below added 06/13/2018, but not currently displayed
+#withsmokecess = NA
+arr_smoke = prob - withsmokecess  #This will be used by details section - which currently not used nor displayed
+#Revise for all
+optimal = withsmokecess * 0.73 #0.73 IS RRR for statins per Taylor et al. Statins for the primary prevention of cardiovascular disease. Cochrane 2013 PMID: 23440795 
+arr_both = prob - optimal #This will be used by details section - which currently not used nor displayed
+	
 #Revise for SBP
+# Moved to last position 08/07/2022 as this was reporting artificially strong impact of smoking cessation due to picking up revised BP coeifficients
 #Fixed 6/13/2018
 #Assuming goal BP is 140
 if (bprx == 1)
@@ -184,20 +200,6 @@ sum = age + age2 + tchol + int1 + hdl + int2 + sbpR + int3 + sbpN + int4 + int5 
 #FIX FORMATTING SO HAS AT LEAST 0
 withsbp = round (100 * (1 - baseline^exp(sum - (meancoef))),2)
 
-#Revise for nonsmoking
-#Below added 06/13/2018
-# First, revise sum of coefficients
-smoke = 0 #Added this 06/13/2018
-int5 = 0 #(Log Age×Current Smoker) ; Added this 06/13/2018
-#if (ethnicity != "b" && gender != "f"){int3=0}
-sum = age + age2 + tchol + int1 + hdl + int2 + sbpR + int3 + sbpN + int4 + int5 + smoke + diabetes
-withsmokecess = round (100 * (1 - baseline^exp(sum - (meancoef))),2)
-#Below added 06/13/2018
-#withsmokecess = NA
-arr_smoke = prob - withsmokecess
-#Revise for all
-optimal = withsmokecess * 0.73
-arr_both = prob - optimal
 #end of calculations
 
 #chart - start
