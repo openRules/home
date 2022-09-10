@@ -429,7 +429,7 @@ if (pageformat == "chart")
   #moderate-dose statins for adults aged 40 to 75 without cardiovascular disease who have at least one CVD risk factor — dyslipidemia, diabetes, hypertension, or smoking — plus a 10-year CVD risk of 10% or greater.
 
   msg = paste(msg, "<h3>Text-only, without graphics, summary for copying into an EHR</h3>")
-  msg = paste(msg, str_replace_all(svgtext, 'polygon', 'polygon hidden')	
+  msg = paste(msg, str_replace_all(svgtext, 'polygon', 'polygon hidden'))
 	
 #chart - end
 
