@@ -136,7 +136,8 @@ arr = prob * 0.13 #0.87 (insig) IS RRR for GLP1Ra per PMID Gerstein (REWIND) Dul
 withsGLP1Ra = prob - arr
 
 #Revise for with aspirin
-arr = prob * 0.22 #0.22 IS RRR for nonfatal MI reduction by aspirin per PMID 27064410
+#arr = prob * 0.22 #0.22 IS RRR for nonfatal MI reduction by aspirin per PMID 27064410 # removed 09/10/2022
+arr = prob * 0.1 #0.1 IS 1 - OR for ASCVD reduction by aspirin per USPSTF PMID https://pubmed.ncbi.nlm.nih.gov/35471507/ # added 09/10/2022
 withaspirin = prob - arr
 
 #Revise for nonsmoking
@@ -331,17 +332,13 @@ if (pageformat == "chart")
   if (prob >= 10)
 	{
 	msg = paste(msg, "<li>Aspirin, low dose, every day:<ul>")
-	if (age0 >= 50 && age0 < 60)
+	if (age0 >= 40 && age0 < 59)
 		{
-		msg = paste(msg, "<li><a href=\"https://www.uspreventiveservicestaskforce.org/Page/Document/RecommendationStatementFinal/aspirin-to-prevent-cardiovascular-disease-and-cancer\">The USPSTF recommends</a>&nbsp;<img src=\"https://raw.githubusercontent.com/openRules/openRules.github.io/master/images/External.svg.png\" width=\"15\" alt=\"opens in new window\"/>) \"initiating low-dose aspirin use for the primary prevention of cardiovascular disease (CVD) and colorectal cancer (CRC) in adults aged 50 to 59 years who have a 10% or greater 10-year CVD risk, are not at increased risk for bleeding, have a life expectancy of at least 10 years, and are willing to take low-dose aspirin daily for at least 10 years\"</li>")
+		msg = paste(msg, "<li><a href=\"https://www.uspreventiveservicestaskforce.org/uspstf/recommendation/aspirin-to-prevent-cardiovascular-disease-preventive-medication\">The USPSTF recommends</a>&nbsp;<img src=\"https://raw.githubusercontent.com/openRules/openRules.github.io/master/images/External.svg.png\" width=\"15\" alt=\"opens in new window\"/>) \"The decision to initiate low-dose aspirin use for the primary prevention of CVD in adults aged 40 to 59 years who have a 10% or greater 10-year CVD risk should be an individual one. Evidence indicates that the net benefit of aspirin use in this group is small. Persons who are not at increased risk for bleeding and are willing to take low-dose aspirin daily are more likely to benefit. This recommendation applies to adults 40 years or older without signs or symptoms of CVD or known CVD and who are not at increased risk for bleeding (eg, no history of gastrointestinal ulcers, recent bleeding, or other medical conditions, or taking medications that increase bleeding risk)\"</li>")
 		}
-	if (age0 >= 60 && age0 < 70)
+	if (age0 >= 60)
 		{
-		msg = paste(msg, "<li><a href=\"https://www.uspreventiveservicestaskforce.org/Page/Document/RecommendationStatementFinal/aspirin-to-prevent-cardiovascular-disease-and-cancer\">The USPSTF states</a></a>&nbsp;<img src=\"https://raw.githubusercontent.com/openRules/openRules.github.io/master/images/External.svg.png\" width=\"15\" alt=\"opens in new window\"/>) \"the decision to initiate low-dose aspirin use for the primary prevention of CVD and CRC in adults aged 60 to 69 years who have a 10% or greater 10-year CVD risk should be an individual one. Persons who are not at increased risk for bleeding, have a life expectancy of at least 10 years, and are willing to take low-dose aspirin daily for at least 10 years are more likely to benefit. Persons who place a higher value on the potential benefits than the potential harms may choose to initiate low-dose aspirin.\"</li>")
-		}
-	if (age0 >= 70 || age0 < 50)
-		{
-		msg = paste(msg, "<li><a href=\"https://www.uspreventiveservicestaskforce.org/Page/Document/RecommendationStatementFinal/aspirin-to-prevent-cardiovascular-disease-and-cancer\">The USPSTF states</a></a>&nbsp;<img src=\"https://raw.githubusercontent.com/openRules/openRules.github.io/master/images/External.svg.png\" width=\"15\" alt=\"opens in new window\"/>) for this age group, \"the current evidence is insufficient to assess the balance of benefits and harms of initiating aspirin use for the primary prevention of CVD.\"</li>")
+		msg = paste(msg, "<li><a href=\"https://www.uspreventiveservicestaskforce.org/uspstf/recommendation/aspirin-to-prevent-cardiovascular-disease-preventive-medication\">The USPSTF states</a></a>&nbsp;<img src=\"https://raw.githubusercontent.com/openRules/openRules.github.io/master/images/External.svg.png\" width=\"15\" alt=\"opens in new window\"/>) \"The USPSTF recommends against initiating low-dose aspirin use for the primary prevention of CVD in adults 60 years or older\"</li>")
 		}
   	msg = paste(msg, "</ul></li>")
   	}
