@@ -250,23 +250,27 @@ if (pageformat == "chart")
   	svgtext = paste(svgtext,"<text x=\"0\" y=\"",currenty, "\" fill=\"black\" style=\"\">With dapagliflozin (a flozin or SGLT2i) for 10 years</text>\n", sep = "")
   	currenty = currenty + 5
   	svgtext = paste(svgtext,"<polygon points=\"0,",currenty,",", withSGLT2i*4,",", currenty, ",", withSGLT2i*4,",", currenty+20, ",0,", currenty+20, "\"  style=\"fill:green;fill-opacity:0.5;stroke-width:0\"/><text x=\"",10+withSGLT2i*4,"\" y=\"", currenty+15,"\" style=\"fill:green;font-weight:bold\">", sprintf("%.1f",withSGLT2i),"%</text>\n", sep = "")
+	textonly = paste(textonly, ' * With dapagliflozin (a flozin or SGLT2i) for 10 years: ', sprintf("%.1f", withSGLT2i), "%<br/>\n", sep='')
   #GLP1Ra
   	currenty = currenty + 35
   	svgtext = paste(svgtext,"<text x=\"0\" y=\"",currenty, "\" fill=\"black\" style=\"\">With dulaglutide (a gliptin or GLP1Ra) for 10 years</text>\n", sep = "")
   	currenty = currenty + 5
   	svgtext = paste(svgtext,"<polygon points=\"0,",currenty,",", withsGLP1Ra*4,",", currenty, ",", withsGLP1Ra*4,",", currenty+20, ",0,", currenty+20, "\"  style=\"fill:green;fill-opacity:0.5;stroke-width:0\"/><text x=\"",10+withsGLP1Ra*4,"\" y=\"", currenty+15,"\" style=\"fill:green;font-weight:bold\">", sprintf("%.1f",withsGLP1Ra),"%</text>\n", sep = "")
+	textonly = paste(textonly, ' * With dulaglutide (a gliptin or GLP1Ra) for 10 years: ', sprintf("%.1f", withsGLP1Ra), "%<br/>\n", sep='')
   	}
   #Aspirin
   	currenty = currenty + 35
   	svgtext = paste(svgtext,"<text x=\"0\" y=\"",currenty, "\" fill=\"black\" style=\"\">With aspirin for 10 years</text>\n", sep = "")
   	currenty = currenty + 5
   	svgtext = paste(svgtext,"<polygon points=\"0,",currenty,",", withaspirin*4,",", currenty, ",", withaspirin*4,",", currenty+20, ",0,", currenty+20, "\"  style=\"fill:green;fill-opacity:0.5;stroke-width:0\"/><text x=\"",10+withaspirin*4,"\" y=\"", currenty+15,"\" style=\"fill:green;font-weight:bold\">", sprintf("%.1f",withaspirin),"%</text>\n", sep = "")
+	textonly = paste(textonly, ' * With aspirin for 10 years: ', sprintf("%.1f", withaspirin), "%<br/>\n", sep='')
   if (smoke0 > 0)
   	{
   	currenty = currenty + 35
   	svgtext = paste(svgtext,"<text x=\"0\" y=\"",currenty, "\" fill=\"black\" style=\"\">With smoking cessation (after 10 - 15 years; PMID <a href=\"http://pubmed.gov/31429895\">31429895</a>)</text>\n", sep = "")
   	currenty = currenty + 5
   	svgtext = paste(svgtext,"<polygon points=\"0,",currenty,",", withsmokecess*4,",", currenty, ",", withsmokecess*4,",", currenty+20, ",0,", currenty+20, "\"  style=\"fill:green;fill-opacity:0.5;stroke-width:0\"/><text x=\"",10+withsmokecess*4,"\" y=\"", currenty+15,"\" style=\"fill:green;font-weight:bold\">", sprintf("%.1f",withsmokecess),"%</text>\n", sep = "")
+	textonly = paste(textonly, ' * With smoking cessation (after 10 - 15 years): ', sprintf("%.1f", withsmokecess), "%<br/>\n", sep='')
   	}
   #Make optimal bar
   currenty = currenty + 35
@@ -280,6 +284,7 @@ if (pageformat == "chart")
   	}
   currenty = currenty + 5
   svgtext = paste(svgtext,"<polygon points=\"0,",currenty,",", optimal*4,",", currenty, ",", optimal*4,",", currenty+20, ",0,", currenty+20, "\"  style=\"fill:green;fill-opacity:0.5;stroke-width:0\"/><text x=\"",10+optimal*4,"\" y=\"", currenty+15,"\" style=\"fill:green;font-weight:bold\">", sprintf("%.1f",optimal),"%</text>", sep = "")
+  textonly = paste(textonly, ' * Without smoking and with optimal cholesterol and blood pressure (after 10-15 years): ', sprintf("%.1f", optimal), "%<br/>\n", sep='')
   #In case old browser
   svgtext = paste(svgtext,"Sorry, your browser does not support inline SVG for dynamic graphics.</svg>")
   #End of SVG
