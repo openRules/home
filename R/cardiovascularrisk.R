@@ -227,7 +227,7 @@ if (pageformat == "chart")
   <polygon points=\"0,18 400,18 400,20 0,20\"  style=\"fill:black;fill-opacity:1;stroke-width:0\"/>
   <text x=\"0\" y=\"35\" fill=\"black\" style=\"\">Your current risk</text>
   <polygon points=\"0,40 ", prob*4,",40 ", prob*4,",60 0,60\"  style=\"fill:red;fill-opacity:0.5;stroke-width:0\"/><text x=\"",10+prob*4,"\" y=\"55\" style=\"fill:red;font-weight:bold\">", sprintf("%.1f",prob),"%</text>\n", sep = "")
-  textonly = paste("Your current risk of ASCVD over 10 years: ", sprintf("%.1f",prob), "\n", sep="")
+  textonly = paste("<b>Your current risk of ASCVD over 10 years: ", sprintf("%.1f",prob), "%</b><br/>\n", sep="")
   currenty = 40
   if (sbp > 140)
   	{
@@ -235,14 +235,14 @@ if (pageformat == "chart")
   	svgtext = paste(svgtext,"<text x=\"0\" y=\"",currenty, "\" fill=\"black\" style=\"\">With lower blood pressure of 140</text>\n", sep = "")
   	currenty = currenty + 5
   	svgtext = paste(svgtext,"<polygon points=\"0,",currenty,",", withsbp*4,",", currenty, ",", withsbp*4,",", currenty+20, ",0,", currenty+20, "\"  style=\"fill:green;fill-opacity:0.5;stroke-width:0\"/><text x=\"",10+withsbp*4,"\" y=\"", currenty+15,"\" style=\"fill:green;font-weight:bold\">", sprintf("%.1f",withsbp),"%</text>\n", sep = "")
-	textonly = paste(textonly, ' * With lower blood pressure of 140: ', sprintf("%.1f", withsbp), "\n", sep='')
+	textonly = paste(textonly, ' * With lower blood pressure of 140: ', sprintf("%.1f", withsbp), "%<br/>\n", sep='')
   	}
   #Statins
   	currenty = currenty + 35
   	svgtext = paste(svgtext,"<text x=\"0\" y=\"",currenty, "\" fill=\"black\" style=\"\">With statins for 10 years</text>\n", sep = "")
   	currenty = currenty + 5
   	svgtext = paste(svgtext,"<polygon points=\"0,",currenty,",", withstatins*4,",", currenty, ",", withstatins*4,",", currenty+20, ",0,", currenty+20, "\"  style=\"fill:green;fill-opacity:0.5;stroke-width:0\"/><text x=\"",10+withstatins*4,"\" y=\"", currenty+15,"\" style=\"fill:green;font-weight:bold\">", sprintf("%.1f",withstatins),"%</text>\n", sep = "")
-	textonly = paste(textonly, ' * With statins for 10 years: ', sprintf("%.1f", withstatins), "\n", sep='')
+	textonly = paste(textonly, ' * With statins for 10 years: ', sprintf("%.1f", withstatins), "%<br/>\n", sep='')
   if (diabetes0 == 1)
   	{
   #SGLT2i
