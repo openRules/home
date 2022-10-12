@@ -222,13 +222,12 @@ if (pageformat == "chart")
   if (sbp > 140) {svgheight=svgheight+40}
   
   svgtext = paste("<svg x=\"0px\" y=\"0px\" width=\"420px\" height=\"",svgheight,"px\" viewBox=\"0 0 420 ",svgheight,"\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">
-  textonly <- paste('Your current risk of ASCVD over 10 years: ', sprintf("%.1f",prob), "\n", sep='')
-
   <!-- Scale -->
   <text x=\"0\" y=\"15\" fill=\"black\" style=\"font-weight:bold\">0%</text><text x=\"90\" y=\"15\" fill=\"black\" style=\"font-weight:bold\">25%</text><text x=\"190\" y=\"15\" fill=\"black\" style=\"font-weight:bold\">50%</text><text x=\"290\" y=\"15\" fill=\"black\" style=\"font-weight:bold\">75%</text><text x=\"380\" y=\"15\" fill=\"black\" style=\"font-weight:bold\">100%</text>
   <polygon points=\"0,18 400,18 400,20 0,20\"  style=\"fill:black;fill-opacity:1;stroke-width:0\"/>
   <text x=\"0\" y=\"35\" fill=\"black\" style=\"\">Your current risk</text>
   <polygon points=\"0,40 ", prob*4,",40 ", prob*4,",60 0,60\"  style=\"fill:red;fill-opacity:0.5;stroke-width:0\"/><text x=\"",10+prob*4,"\" y=\"55\" style=\"fill:red;font-weight:bold\">", sprintf("%.1f",prob),"%</text>\n", sep = "")
+  textonly = paste("Your current risk of ASCVD over 10 years: ", sprintf("%.1f",prob), "\n", sep="")
   currenty = 40
   if (sbp > 140)
   	{
@@ -236,14 +235,14 @@ if (pageformat == "chart")
   	svgtext = paste(svgtext,"<text x=\"0\" y=\"",currenty, "\" fill=\"black\" style=\"\">With lower blood pressure of 140</text>\n", sep = "")
   	currenty = currenty + 5
   	svgtext = paste(svgtext,"<polygon points=\"0,",currenty,",", withsbp*4,",", currenty, ",", withsbp*4,",", currenty+20, ",0,", currenty+20, "\"  style=\"fill:green;fill-opacity:0.5;stroke-width:0\"/><text x=\"",10+withsbp*4,"\" y=\"", currenty+15,"\" style=\"fill:green;font-weight:bold\">", sprintf("%.1f",withsbp),"%</text>\n", sep = "")
-	textonly <- paste(textonly, 'With lower blood pressure of 140: ', sprintf("%.1f", withsbp), "\n", sep='')
+	textonly = paste(textonly, ' * With lower blood pressure of 140: ', sprintf("%.1f", withsbp), "\n", sep='')
   	}
   #Statins
   	currenty = currenty + 35
   	svgtext = paste(svgtext,"<text x=\"0\" y=\"",currenty, "\" fill=\"black\" style=\"\">With statins for 10 years</text>\n", sep = "")
   	currenty = currenty + 5
   	svgtext = paste(svgtext,"<polygon points=\"0,",currenty,",", withstatins*4,",", currenty, ",", withstatins*4,",", currenty+20, ",0,", currenty+20, "\"  style=\"fill:green;fill-opacity:0.5;stroke-width:0\"/><text x=\"",10+withstatins*4,"\" y=\"", currenty+15,"\" style=\"fill:green;font-weight:bold\">", sprintf("%.1f",withstatins),"%</text>\n", sep = "")
-	textonly <- paste(textonly, 'With statins for 10 years: ', sprintf("%.1f", withstatins), "\n", sep='')
+	textonly = paste(textonly, ' * With statins for 10 years: ', sprintf("%.1f", withstatins), "\n", sep='')
   if (diabetes0 == 1)
   	{
   #SGLT2i
