@@ -253,10 +253,10 @@ if (pageformat == "chart")
 	textonly = paste(textonly, ' * With dapagliflozin (a flozin or SGLT2i) for 10 years: ', sprintf("%.1f", withSGLT2i), "%<br/>\n", sep='')
   #GLP1Ra
   	currenty = currenty + 35
-  	svgtext = paste(svgtext,"<text x=\"0\" y=\"",currenty, "\" fill=\"black\" style=\"\">With dulaglutide (a gliptin or GLP1Ra) for 10 years</text>\n", sep = "")
+  	svgtext = paste(svgtext,"<text x=\"0\" y=\"",currenty, "\" fill=\"black\" style=\"\">With dulaglutide (a GLP1Ra medication) for 10 years</text>\n", sep = "")
   	currenty = currenty + 5
   	svgtext = paste(svgtext,"<polygon points=\"0,",currenty,",", withsGLP1Ra*4,",", currenty, ",", withsGLP1Ra*4,",", currenty+20, ",0,", currenty+20, "\"  style=\"fill:green;fill-opacity:0.5;stroke-width:0\"/><text x=\"",10+withsGLP1Ra*4,"\" y=\"", currenty+15,"\" style=\"fill:green;font-weight:bold\">", sprintf("%.1f",withsGLP1Ra),"%</text>\n", sep = "")
-	textonly = paste(textonly, ' * With dulaglutide (a gliptin or GLP1Ra) for 10 years: ', sprintf("%.1f", withsGLP1Ra), "%<br/>\n", sep='')
+	textonly = paste(textonly, ' * With dulaglutide (a GLP1Ra medication) for 10 years: ', sprintf("%.1f", withsGLP1Ra), "%<br/>\n", sep='')
   	}
   #Aspirin
   	currenty = currenty + 35
