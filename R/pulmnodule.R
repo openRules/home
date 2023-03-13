@@ -1,4 +1,4 @@
-pulmnodule <- function(age = 0, diameter = 0, cancer = 0, smoker = 0, spiculation = 0, location = 0, geo_region = 'none'){
+pulmnodule <- function(age = 0, diameter = 0, cancer = 0, smoker = 0, spiculation = 0, location = 0, geo_region = 'none'){  
   if(age < 1){
     stop("Tell me your age!")
   }
