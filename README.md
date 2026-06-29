@@ -8,7 +8,7 @@ These clinical prediction rules are available online at this [link](https://publ
 *  [Mayo Clinic model for prediction of malignancy in patients with noncalcified pulmonary nodules](http://pubmed.gov/23649456) for the Diagnosis and Management of Lung Cancer, 3rd ed: American College of Chest Physicians Evidence-Based Clinical Practice Guidelines
 *  [NASBP2 calculator for breast cancer risk accessment](http://pubmed.gov/10491430) for 2016 U.S. Preventive Services Task Force guideline for breast cancer screening and 2013 USPSTF Breast Cancer: Medications for Risk Reduction. 
 
-The [Source code](https://github.com/openrules) here at GitHub is available:
+The [Source code](https://github.com/openrules) here at GitHub is available: 
    * Feel free to add new rules and improve existing rules
    * These pages may not function on older  versions of Internet Explorer.
  
